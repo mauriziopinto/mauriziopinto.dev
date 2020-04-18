@@ -1,7 +1,7 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "Test"
+date: 2020-04-18T07:42:43+02:00
+lastmod: 2020-04-18T07:42:43+02:00
 draft: true
 author: ""
 authorLink: ""
