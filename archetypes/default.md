@@ -1,5 +1,6 @@
 ---
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
+subtitle: ""
 date: {{ .Date }}
 lastmod: {{ .Date }}
 draft: true
@@ -11,6 +12,7 @@ license: ""
 tags: []
 categories: []
 hiddenFromHomePage: false
+hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
@@ -18,6 +20,14 @@ featuredImagePreview: ""
 toc: false
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:

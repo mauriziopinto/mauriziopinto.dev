@@ -1,6 +1,7 @@
 ---
 weight: 4
 title: "Basic Markdown Syntax"
+subtitle: ""
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
@@ -19,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -640,7 +649,7 @@ The rendered output looks like this:
 | ext    | extension to be used for dest files. |
 {{< /admonition >}}
 
-## 11 Links
+## 11 Links {#links}
 
 ### Basic Link
 
@@ -768,5 +777,5 @@ With a reference later in the document defining the URL location:
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** theme has [special shortcode for image](../theme-documentation-shortcodes/#image), which provides more features.
+**LoveIt** theme has [special shortcode for image](../theme-documentation-extended-shortcodes/#image), which provides more features.
 {{< /admonition >}}

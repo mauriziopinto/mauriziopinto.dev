@@ -1,6 +1,7 @@
 ---
 weight: 1
 title: "Theme Documentation - Basics"
+subtitle: ""
 date: 2020-03-06T21:29:01+08:00
 lastmod: 2020-03-06T21:29:01+08:00
 draft: false
@@ -19,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: false
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -34,10 +43,14 @@ Discover what the Hugo - **LoveIt** theme is all about and the core-concepts beh
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
 
-Just install latest version of [:(far fa-file-archive): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+Just install latest version of [:(far fa-file-archive): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **v0.62.0**.
+Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
+{{< /admonition >}}
+
+{{< admonition note "Why need the Hugo extended version?" >}}
+Since this theme processes SCSS to CSS, Hugo needs to be the **extended** version.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -62,14 +75,14 @@ You can download the [latest release :(far fa-file-archive): .zip file](https://
 Alternatively, clone this repository to the `themes` directory:
 
 ```bash
-git clone -b master https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 Or, create an empty git repository and make this repository a submodule of your site directory:
 
 ```bash
 git init
-git submodule -b master add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 ### 2.3 Basic Configuration {#basic-configuration}
@@ -94,7 +107,7 @@ theme = "LoveIt"
 [menu]
   [[menu.main]]
     identifier = "posts"
-    # you can add extra information before the name (HTML format is allowed), such as icons
+    # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
     name = "Posts"
     url = "/posts/"
@@ -188,9 +201,20 @@ Note that some of these parameters are explained in details in other sections of
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
-  # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
-  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  # {{< version 0.1.1 >}} which hash function used for SRI, when empty, no SRI is used
+  # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
+  # {{< version 0.2.0 >}} Search
+  [params.search]
+    enable = true
+    # type of search engine ("lunr", "algolia")
+    type = "lunr"
+    # index length of the content
+    contentLength = 5000
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
   # Header info
   [params.header]
     # desktop header mode ("fixed", "normal", "auto")
@@ -201,10 +225,10 @@ Note that some of these parameters are explained in details in other sections of
   [params.footer]
     # Site creation time
     since = 2019
-    # ICP info only in China (HTML format is allowed)
+    # ICP info only in China (HTML format is supported)
     icp = ""
-    # license info (HTML format is allowed)
-    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    # license info (HTML format is supported)
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
   # Home Page Info
   [params.home]
     # Home Page Profile
@@ -220,6 +244,8 @@ Note that some of these parameters are explained in details in other sections of
       typeit = true
       # whether to show social links
       social = true
+      # {{< version 0.2.0 >}} disclaimer (HTML format is supported)
+      disclaimer = ""
     # Home Page Posts
     [params.home.posts]
       enable = true
@@ -300,7 +326,7 @@ Note that some of these parameters are explained in details in other sections of
     lightgallery = true
     # whether to show link to Raw Markdown content of the post
     linkToMarkdown = true
-  # mathematical formulas (KaTeX https://katex.org/)
+  # {{< link "https://katex.org/" KaTeX >}} mathematical formulas
   [params.math]
     enable = true
     # default block delimiter is $$ ... $$ and \\[ ... \\]
@@ -313,6 +339,22 @@ Note that some of these parameters are explained in details in other sections of
     copyTex = true
     # KaTeX extension mhchem
     mhchem = true
+  # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+  [params.mapbox]
+    # access token of Mapbox GL JS
+    accessToken = ""
+    # style for the light theme
+    lightStyle = "mapbox://styles/mapbox/light-v9"
+    # style for the dark theme
+    darkStyle = "mapbox://styles/mapbox/dark-v9"
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+    navigation = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+    geolocate = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+    scale = true
+    # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+    fullscreen = true
   # Social Share Links in post page
   [params.share]
     enable = true
@@ -346,21 +388,21 @@ Note that some of these parameters are explained in details in other sections of
   # Comment Config
   [params.comment]
     enable = true
-    # Disqus Comment Config (https://disqus.com/)
+    # {{< link "https://disqus.com/" Disqus >}} Comment Config
     [params.comment.disqus]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # {{< version 0.1.1 >}}
       enable = false
       # Disqus shortname to use Disqus in posts
       shortname = ""
-    # Gitalk Comment Config (https://github.com/gitalk/gitalk)
+    # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} Comment Config
     [params.comment.gitalk]
-      # LoveIt :(fas fa-greater-than-equal): :(far fa-file-archive): v0.1.1
+      # {{< version 0.1.1 >}}
       enable = false
       owner = ""
       repo = ""
       clientId = ""
       clientSecret = ""
-    # Valine Comment Config (https://github.com/xCss/Valine)
+    # {{< link "https://github.com/xCss/Valine" Valine >}} Comment Config
     [params.comment.valine]
       enable = false
       appId = ""
@@ -374,13 +416,23 @@ Note that some of these parameters are explained in details in other sections of
       lang = "en"
       visitor = true
       recordIP = true
-    # Facebook Comment Config (https://developers.facebook.com/docs/plugins/comments)
+    # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook Comment" >}} Config
     [params.comment.facebook]
       enable = false
       width = "100%"
       numPosts = 10
       appId = ""
       languageCode = "en_US"
+    # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram Comments" >}} Config
+    [params.comment.telegram]
+      enable = false
+      siteID = ""
+      limit = 5
+      height = ""
+      color = ""
+      colorful = true
+      dislikes = false
+      outlined = false
 
   # site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -408,58 +460,70 @@ Note that some of these parameters are explained in details in other sections of
     height = 600
   # CSS and JS Files CDN
   [params.cdn]
-    # fontawesome-free@5.12.1 https://fontawesome.com/
+    # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
+    normalizeCSS = ''
+    # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.12.1
     fontawesomeFreeCSS = ''
     # animate.css@3.7.2 https://github.com/daneden/animate.css
     animateCSS = ''
-    # smooth-scroll@16.1.2 https://github.com/cferdinandi/smooth-scroll
+    # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.2
     smoothScrollJS = ''
-    # sharer@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ''
-    # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
+    autocompleteJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
+    lunrJS = ''
+    # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.1.0
+    algoliasearchJS = ''
+    # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
     lazysizesJS = ''
-    # lightgallery@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0 https://github.com/sachinchoolur/lightgallery.js
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
     lightgalleryCSS = ''
     lightgalleryJS = ''
     lightgalleryThumbnailJS = ''
     lightgalleryZoomJS = ''
-    # typeit@6.5.1 https://github.com/alexmacarthur/typeit
+    # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
+    clipboardJS = ''
+    # {{< link "https://github.com/ellisonleao/sharer.js" "sharer" >}}@0.4.0
+    sharerJS = ''
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
     typeitJS = ''
-    # katex@0.11.1 https://github.com/KaTeX/KaTeX
+    # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
     katexCSS = ''
     katexJS = ''
     katexAutoRenderJS = ''
     katexCopyTexCSS = ''
     katexCopyTexJS = ''
     katexMhchemJS = ''
-    # mermaid@8.4.8 https://github.com/knsv/mermaid
+    # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.4.8
     mermaidJS = ''
-    # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ''
-    aplayerJS = ''
-    # meting@2.0.1 https://github.com/metowolf/MetingJS
-    metingJS = ''
-    # echarts@4.6.0 https://echarts.apache.org/
+    # {{< link "https://echarts.apache.org/" "echarts" >}}@4.6.0
     echartsJS = ''
     echartsMacaronsJS = ''
-    # gitalk@1.6.2 https://github.com/gitalk/gitalk
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.8.1
+    mapboxGLCSS = ''
+    mapboxGLJS = ''
+    # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
+    aplayerCSS = ''
+    aplayerJS = ''
+    # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
+    metingJS = ''
+    # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
     gitalkCSS = ''
     gitalkJS = ''
-    # valine@1.3.10 https://valine.js.org/
+    # {{< link "https://valine.js.org/" "valine" >}}@1.3.10
     valineJS = ''
 
 # Markup related configuration in Hugo
 [markup]
-  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
   [markup.highlight]
     codeFences = true
     guessSyntax = true
-    lineNoStart = 1
     lineNos = true
     lineNumbersInTable = true
+    # false is a necessary configuration
+    # ({{< link "https://github.com/dillonzq/LoveIt/issues/158" >}})
     noClasses = false
-    style = "monokai"
-    tabWidth = 4
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   [markup.goldmark]
     [markup.goldmark.extensions]
@@ -489,12 +553,12 @@ Note that some of these parameters are explained in details in other sections of
   filename = "sitemap.xml"
   priority = 0.5
 
-# Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
+# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks Info" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
+# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy Info" >}}
 [privacy]
   [privacy.googleAnalytics]
     anonymizeIP = true
@@ -515,12 +579,23 @@ Note that some of these parameters are explained in details in other sections of
 
 # Options to make hugo output files
 [outputs]
-  home = ["HTML", "RSS"]
+  # {{< version 0.2.0 changed >}}
+  home = ["HTML", "RSS", "JSON"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 ```
+
+{{< admonition tip "Tips about CDN Configuration" >}}
+Full HTML tags or URLs are supported for CDN configuration:
+
+```toml
+smoothScrollJS = '<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" integrity="sha256-vP+F+14A1ogChQs5Osd5LJl/ci9TbzjiZjjEbcqOXrY=" crossorigin="anonymous"></script>'
+# Or
+smoothScrollJS = 'https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js'
+```
+{{< /admonition >}}
 
 ![Complete configuration preview](/images/theme-documentation-basics/complete-configuration-preview.png "Complete configuration preview")
 
@@ -562,23 +637,29 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ## 4 Multilingual and i18n
 
-**LoveIt** theme is fully compatible with Hugo multilingual mode.
-
-It provides:
-
-* Translation strings for default values (**English**, **Chinese** and **French**). **Feel free to contribute!**
-* In-browser language switching
+**LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
 ![Language Switch](/images/theme-documentation-basics/language-switch.gif "Language Switch")
 
-### 4.1 Basic Configuration
+### 4.1 Compatibility {#language-compatibility}
+
+| Language           | Hugo Code | HTML `lang` Attribute | Theme Docs              | Lunr.js Support         |
+|:------------------ |:---------:|:---------------------:|:-----------------------:|:-----------------------:|
+| English            | `en`      | `en`                  | :(far fa-check-square): | :(far fa-check-square): |
+| Simplified Chinese | `zh-cn`   | `zh-CN`               | :(far fa-check-square): | :(far fa-check-square): |
+| French             | `fr`      | `fr`                  | :(far fa-square):       | :(far fa-check-square): |
+| Polish             | `pl`      | `pl`                  | :(far fa-square):       | :(far fa-square):       |
+
+:(far fa-kiss-wink-heart): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
+
+### 4.2 Basic Configuration
 
 After learning [how Hugo handle multilingual websites](https://gohugo.io/content-management/multilingual), define your languages in your [site configuration](#site-configuration).
 
 For example with English, Chinese and French website:
 
 ```toml
-# [en, zh-cn, fr, ...] determines default content language
+# [en, zh-cn, fr, pl, ...] determines default content language
 defaultContentLanguage = "en"
 
 [languages]
@@ -683,10 +764,57 @@ Be aware that only translated pages are displayed in menu. It’s not replaced w
 Use [Front Matter parameter](https://gohugo.io/content-management/multilingual/#translate-your-content) to translate urls too.
 {{< /admonition >}}
 
-### 4.2 Overwrite Translation Strings
+### 4.3 Overwrite Translation Strings
 
-Translations strings are used for common default values used in the theme. Translations are available in **English**, **Chinese** and **French**, but you may use another language or want to override default values.
+Translations strings are used for common default values used in the theme. Translations are available in [some languages](#language-compatibility), but you may use another language or want to override default values.
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
 
 By the way, as these translations could be used by other people, please take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+
+## 5 Search
+
+{{< version 0.2.0 >}}
+
+Based on [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/), searching is supported in **LoveIt** theme.
+
+### 5.1 Output Configuration
+
+In order to generate `index.json` for searching, add `JSON` output file type to the `home` of the `outputs` part in your [site configuration](#site-configuration).
+
+```toml
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+```
+
+### 5.2 Search Configuration
+
+Based on `index.json` generated by Hugo, you could activate searching.
+
+Here is the search configuration in your [site configuration](#site-configuration):
+
+```toml
+[params.search]
+  enable = true
+  # type of search engine ("lunr", "algolia")
+  type = "lunr"
+  # index length of the content
+  contentLength = 5000
+  [params.search.algolia]
+    index = ""
+    appID = ""
+    searchKey = ""
+```
+
+{{< admonition note "How to choose the type of search engine?" >}}
+* `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
+  but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
+* `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
+{{< /admonition >}}
+
+{{< admonition tip "Tips about algolia" >}}
+You need to upload `index.json` files to algolia to activate searching.
+You could upload the `index.json` files by browsers but a script may be a better choice.
+To be compatible with Hugo multilingual mode,
+you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
+{{< /admonition >}}

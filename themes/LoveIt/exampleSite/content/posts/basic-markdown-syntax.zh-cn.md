@@ -1,6 +1,7 @@
 ---
 weight: 4
 title: "Markdown 基本语法"
+subtitle: ""
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
 draft: false
@@ -19,6 +20,14 @@ featuredImagePreview: ""
 toc: true
 autoCollapseToc: true
 math: false
+mapbox:
+    accessToken: ""
+    lightStyle: ""
+    darkStyle: ""
+    navigation: true
+    geolocate: true
+    scale: true
+    fullscreen: true
 lightgallery: true
 linkToMarkdown: true
 share:
@@ -642,7 +651,7 @@ grunt.initConfig({
 | ext    | extension to be used for dest files. |
 {{< /admonition >}}
 
-## 11 链接
+## 11 链接 {#links}
 
 ### 基本链接
 
@@ -775,5 +784,5 @@ Content for chapter one.
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
 {{< admonition tip >}}
-**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-shortcodes/#image).
+**LoveIt** 主题提供了一个包含更多功能的 [图片的 shortcode](../theme-documentation-extended-shortcodes/#image).
 {{< /admonition >}}
