@@ -1,5 +1,5 @@
 {{- $scratch := .Scratch.Get "scratch" -}}
-{{- $CDN := $scratch.Get "CDN" -}}
+{{- $CDN := .Site.Params.cdn -}}
 {{- $fingerprint := $scratch.Get "fingerprint" -}}
 
 <link rel="canonical" href="{{ .Permalink }}" />
@@ -42,3 +42,4 @@
 {{- $source := $CDN.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $stylesheet := dict "source" $source "fingerprint" $fingerprint -}}
 {{- partial "plugin/stylesheet.html" $stylesheet -}}
+

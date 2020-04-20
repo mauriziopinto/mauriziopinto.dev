@@ -5,17 +5,17 @@ subtitle: ""
 date: 2020-04-18T17:04:25+02:00
 lastmod: 2020-04-18T17:04:25+02:00
 draft: false
-author: "Maurizio"
+author: ""
 authorLink: ""
-description: ""
+description: "Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it."
 license: ""
 
 tags: []
 categories: []
 hiddenFromHomePage: false
 
-featuredImage: "images/banner.png"
-featuredImagePreview: "images/banner.png"
+featuredImage: "../images/banner.png"
+featuredImagePreview: "../images/banner.png"
 
 toc: true
 autoCollapseToc: false
